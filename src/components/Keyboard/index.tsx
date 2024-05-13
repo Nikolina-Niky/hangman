@@ -17,7 +17,7 @@ const Index = () => {
 
   const dispatch = useAppDispatch();
   const guessed = useAppSelector(guessedLetters);
-  const notGueesed = useAppSelector(notGuessedLetters);
+  const notGuessed = useAppSelector(notGuessedLetters);
   const gameOver = useAppSelector(isGameOver);
 
   return (
@@ -26,7 +26,7 @@ const Index = () => {
         <MarginButton
           key={`${letter}${i}`}
           disabled={
-            gameOver || guessed.includes(letter) || notGueesed.includes(letter)
+            gameOver || guessed.includes(letter) || notGuessed.includes(letter)
           }
           variant="contained"
           onClick={() => dispatch(tryLetter(letter))}

@@ -1,3 +1,4 @@
-import { getAlphabet } from "./helperFuctions";
+import { getAlphabet } from "./helperFunctions";
+import { calculateScore } from "./helperFunctions";
 
-export { getAlphabet };
+export { getAlphabet, calculateScore };

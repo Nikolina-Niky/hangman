@@ -14,6 +14,12 @@ To run in the development:
 npm run dev
 ```
 
+To run tests:
+
+```sh
+npm run test
+```
+
 That command opens http://localhost:5173/login page in your browser.
 
 ## NOTE: Project automatically use node version v21.6.2 trough NVM

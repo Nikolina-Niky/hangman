@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ScoringResult } from "./types";
-import { calculateScore } from "../../utils/helperFuctions";
+import { calculateScore } from "../../utils";
 
 export const httpsScoringService = axios.create({
   baseURL:
