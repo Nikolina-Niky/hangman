@@ -7,6 +7,7 @@ import {
   numberOfErrors,
   quote,
   stopGame,
+  isTimeout,
 } from "../../redux";
 import { useEffect } from "react";
 
@@ -15,9 +16,10 @@ const Index = () => {
   const guessed = useAppSelector(guessedLetters);
   const guessedQuote = useAppSelector(quote);
   const errors = useAppSelector(numberOfErrors);
-  const quoteToGuess = useAppSelector(quote);
+  const timeout = useAppSelector(isTimeout);
   const dispatch = useAppDispatch();
 
+  // it is used only here, if it shoud be used on multiple places it will be moved to reducer
   const isWinner =
     guessedQuote &&
     notGuessed.length <= 5 &&
@@ -31,17 +33,26 @@ const Index = () => {
 
   useEffect(() => {
     if (isWinner || isLoser) {
-      dispatch(stopGame());
+      dispatch(stopGame(false));
     }
   }, [isWinner, isLoser, dispatch]);
 
-  return (
-    <>
-      {!isWinner && !isLoser && quoteToGuess && (
-        <Typography variant="h2">{`number of letters that do not match ${errors}`}</Typography>
-      )}
-    </>
-  );
+  const getTitle = () => {
+    switch (true) {
+      case isLoser:
+        return "Nice try!";
+      case isWinner:
+        return "Wohoooo, you win!";
+      case timeout:
+        return "Sorry your time is out!";
+      default:
+        return `number of letters that do not match ${errors}.  Tries left ${
+          6 - errors
+        }`;
+    }
+  };
+
+  return <Typography variant="h2">{getTitle()}</Typography>;
 };
 
 export default Index;

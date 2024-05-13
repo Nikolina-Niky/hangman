@@ -12,7 +12,7 @@ const Index = () => {
       <Grid item alignSelf="end">
         <Typography variant="h1">{`Welcome ${currentUser}`}</Typography>
         <Typography variant="h3">
-          Reday? Let's play the game! Good luck
+          Ready? Let's play the game! Good luck
         </Typography>
       </Grid>
       <Grid item>
@@ -23,7 +23,9 @@ const Index = () => {
         >
           Start the game
         </Button>
-        <Typography pt={3}>Note: You can use only buttons</Typography>
+        <Typography pt={3}>
+          Note: You can use only buttons (letters) on the screen
+        </Typography>
       </Grid>
     </Grid>
   );

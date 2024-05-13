@@ -1,5 +1,6 @@
 import axios from "axios";
 import { ScoringResult } from "./types";
+import { calculateScore } from "../../utils/helperFuctions";
 
 export const httpsScoringService = axios.create({
   baseURL:
@@ -18,9 +19,14 @@ export const getScoringResults = async () => {
   const { data } = await httpsScoringService.get<ScoringResult[]>(
     "/highscores"
   );
-  const mappedScore = data.map((row) => ({
-    ...row,
-    score: 100 / 1 + row.errors,
+
+  return data.map((result) => ({
+    ...result,
+    score: calculateScore(
+      result.length,
+      result.uniqueCharacters,
+      result.errors,
+      result.duration
+    ),
   }));
-  return mappedScore;
 };

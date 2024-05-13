@@ -8,6 +8,7 @@ interface GameState {
   notGuessedLetters: string[];
   startedTime: number;
   isGameOver: boolean;
+  isTimeout: boolean;
   gameResults: Partial<ScoringResult> | null;
 }
 
@@ -17,6 +18,7 @@ const initialState: GameState = {
   notGuessedLetters: [],
   startedTime: 0,
   isGameOver: false,
+  isTimeout: false,
   gameResults: null,
 };
 
@@ -26,6 +28,7 @@ export const loginSlice = createSlice({
   reducers: {
     startGame: (state, action: PayloadAction<Quote>) => {
       state.isGameOver = initialState.isGameOver;
+      state.isTimeout = initialState.isTimeout;
       state.guessedLetters = initialState.guessedLetters;
       state.notGuessedLetters = initialState.notGuessedLetters;
       state.quote = action.payload;
@@ -37,18 +40,19 @@ export const loginSlice = createSlice({
         ? state.guessedLetters.push(action.payload.toUpperCase())
         : state.notGuessedLetters.push(action.payload.toUpperCase());
     },
-    stopGame: (state) => {
+    stopGame: (state, action: PayloadAction<boolean>) => {
       const currentDate = new Date();
       const finishedTime = currentDate.getTime();
       const uniqueChar = [...new Set(state.quote?.content.toUpperCase())];
       state.gameResults = {
         quoteId: state.quote?._id,
         length: state.quote?.content.length,
-        uniqueCharacters: uniqueChar.filter((letter) => letter.match("[[A-Z]]"))
+        uniqueCharacters: uniqueChar.filter((letter) => letter.match("[A-Z]"))
           .length,
         duration: finishedTime - state.startedTime,
         errors: state.notGuessedLetters.length,
       };
+      state.isTimeout = action.payload;
       state.isGameOver = true;
     },
   },
@@ -64,3 +68,4 @@ export const numberOfErrors = (state: RootState) =>
 export const isGameOver = (state: RootState) => state.game.isGameOver;
 export const gameResult = (state: RootState) => state.game.gameResults;
 export default loginSlice.reducer;
+export const isTimeout = (state: RootState) => state.game.isTimeout;

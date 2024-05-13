@@ -7,7 +7,7 @@ import { useAppDispatch, loginUser } from "../../redux";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup.object().shape({
-  name: yup.string().default("").required("Name is a required"),
+  name: yup.string().trim().default("").required("Name is a required").min(2),
 });
 
 type FormType = yup.InferType<typeof schema>;

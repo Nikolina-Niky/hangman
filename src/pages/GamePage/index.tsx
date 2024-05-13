@@ -15,10 +15,11 @@ import {
   gameResult,
   loggedUser,
   isGameOver,
+  stopGame,
 } from "../../redux";
 import { ScoringResult } from "../../services";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const Index = () => {
   const dispatch = useAppDispatch();
@@ -51,16 +52,23 @@ const Index = () => {
 
   useEffect(() => {
     if (gameOver && results && currentUser) {
-      const finalResult = { ...results, userName: currentUser };
-      sendResults(finalResult as ScoringResult);
+      console.log(results);
+      sendResults({ ...results, userName: currentUser } as ScoringResult);
     }
   }, [gameOver, results, currentUser, sendResults]);
+
+  const timeoutGameAfter10min = useCallback(() => {
+    setTimeout(() => {
+      dispatch(stopGame(true));
+    }, 600000);
+  }, [dispatch]);
 
   useEffect(() => {
     if (quote) {
       dispatch(startGame(quote));
+      timeoutGameAfter10min();
     }
-  }, [quote, dispatch]);
+  }, [quote, dispatch, timeoutGameAfter10min]);
 
   return (
     <Suspense isPending={isPending} error={error?.message}>

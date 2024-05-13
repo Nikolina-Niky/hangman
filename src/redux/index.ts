@@ -10,6 +10,7 @@ import {
   isGameOver,
   stopGame,
   gameResult,
+  isTimeout,
 } from "./reducers/gameReducer";
 
 export {
@@ -26,4 +27,5 @@ export {
   isGameOver,
   stopGame,
   gameResult,
+  isTimeout,
 };

@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getScoringResults } from "../../services";
-import { Suspense } from "../../components";
+import { Suspense, GameStatus } from "../../components";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Grid } from "@mui/material";
 
 const Index = () => {
   const {
@@ -30,15 +31,28 @@ const Index = () => {
 
   return (
     <Suspense isPending={isPending} error={error?.message}>
-      <DataGrid
-        rows={scoreList}
-        columns={columns}
-        initialState={{
-          sorting: {
-            sortModel: [{ field: "score", sort: "desc" }],
-          },
-        }}
-      />
+      <Grid
+        container
+        display="flex"
+        direction="column"
+        alignItems="center"
+        gap={3}
+      >
+        <Grid item>
+          <GameStatus />
+        </Grid>
+        <Grid item>
+          <DataGrid
+            rows={scoreList}
+            columns={columns}
+            initialState={{
+              sorting: {
+                sortModel: [{ field: "score", sort: "desc" }],
+              },
+            }}
+          />
+        </Grid>
+      </Grid>
     </Suspense>
   );
 };
