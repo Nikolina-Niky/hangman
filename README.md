@@ -22,4 +22,4 @@ npm run test
 
 That command opens http://localhost:5173/login page in your browser.
 
-## NOTE: Project automatically use node version v21.6.2 trough NVM
+## NOTE: Project automatically use node version v20.13.1 trough NVM

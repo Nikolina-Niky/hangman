@@ -19,7 +19,6 @@ const Index = () => {
   const timeout = useAppSelector(isTimeout);
   const dispatch = useAppDispatch();
 
-  // it is used only here, if it should be used on multiple places it will be moved to reducer
   const isWinner =
     guessedQuote &&
     notGuessed.length <= 5 &&

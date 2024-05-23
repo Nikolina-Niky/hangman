@@ -57,6 +57,8 @@ const Index = () => {
     }
   }, [gameOver, results, currentUser, sendResults]);
 
+  //TODO skip the always wining game
+
   const timeoutGameAfter10min = useCallback(() => {
     setTimeout(() => {
       dispatch(stopGame(true));

@@ -59,6 +59,7 @@ export const loginSlice = createSlice({
 });
 
 export const { startGame, tryLetter, stopGame } = loginSlice.actions;
+
 export const quote = (state: RootState) => state.game.quote;
 export const guessedLetters = (state: RootState) => state.game.guessedLetters;
 export const notGuessedLetters = (state: RootState) =>
@@ -67,5 +68,6 @@ export const numberOfErrors = (state: RootState) =>
   state.game.notGuessedLetters.length;
 export const isGameOver = (state: RootState) => state.game.isGameOver;
 export const gameResult = (state: RootState) => state.game.gameResults;
-export default loginSlice.reducer;
 export const isTimeout = (state: RootState) => state.game.isTimeout;
+
+export default loginSlice.reducer;
