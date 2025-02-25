@@ -52,7 +52,6 @@ const Index = () => {
 
   useEffect(() => {
     if (gameOver && results && currentUser) {
-      console.log(results);
       sendResults({ ...results, userName: currentUser } as ScoringResult);
     }
   }, [gameOver, results, currentUser, sendResults]);
